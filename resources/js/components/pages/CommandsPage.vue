@@ -57,7 +57,7 @@ const {
     toggleDetail,
     sortBy,
     sortDirection,
-    setSort
+    setSort, startPolling, stopPolling 
 } = useEntries('command');
 
 const { filters, getActiveFilters, resetFilters } = useFilters({

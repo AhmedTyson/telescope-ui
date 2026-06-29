@@ -119,7 +119,7 @@ const {
   toggleDetail,
   sortBy,
   sortDirection,
-  setSort,
+  setSort, startPolling, stopPolling 
 } = useEntries('query');
 
 const {

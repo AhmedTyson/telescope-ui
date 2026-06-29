@@ -93,7 +93,7 @@ const {
   loadingDetail,
   fetchEntries,
   loadMore,
-  toggleDetail,
+  toggleDetail, startPolling, stopPolling 
 } = useEntries('job');
 
 const {

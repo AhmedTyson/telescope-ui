@@ -73,7 +73,7 @@ const {
     loadingDetail,
     fetchEntries,
     loadMore,
-    toggleDetail
+    toggleDetail, startPolling, stopPolling 
 } = useEntries('notification');
 
 const { filters, getActiveFilters, resetFilters } = useFilters({

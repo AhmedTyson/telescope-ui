@@ -79,7 +79,7 @@ const {
     toggleDetail,
     sortBy,
     sortDirection,
-    setSort
+    setSort, startPolling, stopPolling 
 } = useEntries('redis');
 
 const { filters, getActiveFilters, resetFilters } = useFilters({

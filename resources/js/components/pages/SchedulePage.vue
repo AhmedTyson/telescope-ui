@@ -45,7 +45,7 @@ const {
     loadingDetail,
     fetchEntries,
     loadMore,
-    toggleDetail
+    toggleDetail, startPolling, stopPolling 
 } = useEntries('schedule');
 
 const { filters, getActiveFilters, resetFilters } = useFilters({

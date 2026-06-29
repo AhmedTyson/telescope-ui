@@ -84,7 +84,7 @@ const {
   loadingDetail,
   fetchEntries,
   loadMore,
-  toggleDetail,
+  toggleDetail, startPolling, stopPolling 
 } = useEntries('exception');
 
 const {

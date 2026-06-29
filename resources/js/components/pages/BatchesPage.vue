@@ -67,7 +67,7 @@ const {
     loadingDetail,
     fetchEntries,
     loadMore,
-    toggleDetail
+    toggleDetail, startPolling, stopPolling 
 } = useEntries('batch');
 
 const { filters, getActiveFilters, resetFilters } = useFilters({

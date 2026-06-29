@@ -114,7 +114,7 @@ const {
     toggleDetail,
     sortBy,
     sortDirection,
-    setSort
+    setSort, startPolling, stopPolling 
 } = useEntries('client_request');
 
 const { filters, getActiveFilters, resetFilters } = useFilters({

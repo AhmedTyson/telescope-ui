@@ -42,8 +42,9 @@ const routes = [
 ];
 
 const router = createRouter({
-    history: createWebHashHistory(),
+    history: createWebHashHistory("/telescope-dashboard/"),
     routes,
 });
 
 export default router;
+

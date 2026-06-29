@@ -59,7 +59,7 @@ const {
     loadingDetail,
     fetchEntries,
     loadMore,
-    toggleDetail
+    toggleDetail, startPolling, stopPolling 
 } = useEntries('cache');
 
 const { filters, getActiveFilters, resetFilters } = useFilters({
