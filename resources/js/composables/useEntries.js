@@ -47,9 +47,9 @@ export function useEntries(type) {
         try {
             const res = await apiPost('/entries', payload);
             if (append) {
-                entries.value = [...entries.value, ...res.data];
+                entries.value = [...entries.value, ...res.entries];
             } else {
-                entries.value = res.data;
+                entries.value = res.entries;
             }
             hasMore.value = res.has_more;
             nextCursor.value = res.next_cursor;
