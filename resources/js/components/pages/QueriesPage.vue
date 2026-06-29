@@ -1,10 +1,10 @@
 <template>
   <div>
-    <h1 class="text-2xl font-bold text-gray-900 dark:text-white mb-6">Database Queries</h1>
+    <h1 class="text-2xl font-bold text-[#f4f4f5] dark:text-white mb-6">Database Queries</h1>
 
     <FilterPanel :active-count="Object.keys(getActiveFilters()).length" @search="search" @reset="reset">
       <div>
-        <label class="block text-xs font-medium text-gray-500 dark:text-gray-400 mb-1">Content</label>
+        <label class="block text-xs font-medium text-[#a1a1aa] dark:text-[#71717a] mb-1">Content</label>
         <input
           v-model="filters.content"
           type="text"
@@ -14,19 +14,19 @@
       </div>
 
       <div>
-        <label class="block text-xs font-medium text-gray-500 dark:text-gray-400 mb-1">Slow Queries</label>
-        <label class="inline-flex items-center gap-2 cursor-pointer text-sm text-gray-700 dark:text-gray-300 mt-2">
+        <label class="block text-xs font-medium text-[#a1a1aa] dark:text-[#71717a] mb-1">Slow Queries</label>
+        <label class="inline-flex items-center gap-2 cursor-pointer text-sm text-[#a1a1aa] dark:text-[#71717a] mt-2">
           <input
             v-model="filters.slow_query"
             type="checkbox"
-            class="rounded bg-white dark:bg-telescope-dark border-gray-300 dark:border-telescope-border text-telescope-accent focus:ring-telescope-accent"
+            class="rounded bg-transparent  border-telescope-border  text-telescope-accent focus:ring-telescope-accent"
           />
           Slow Queries Only
         </label>
       </div>
 
       <div>
-        <label class="block text-xs font-medium text-gray-500 dark:text-gray-400 mb-1">Query Type</label>
+        <label class="block text-xs font-medium text-[#a1a1aa] dark:text-[#71717a] mb-1">Query Type</label>
         <select v-model="filters.query_type" class="select-field">
           <option value="">All</option>
           <option value="select">SELECT</option>
@@ -37,7 +37,7 @@
       </div>
 
       <div>
-        <label class="block text-xs font-medium text-gray-500 dark:text-gray-400 mb-1">Min Duration (ms)</label>
+        <label class="block text-xs font-medium text-[#a1a1aa] dark:text-[#71717a] mb-1">Min Duration (ms)</label>
         <input
           v-model.number="filters.min_duration"
           type="number"
@@ -176,3 +176,4 @@ onMounted(() => {
   search();
 });
 </script>
+

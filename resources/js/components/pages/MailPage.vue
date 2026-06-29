@@ -1,21 +1,21 @@
 <template>
     <div>
-        <h1 class="text-2xl font-bold text-gray-900 dark:text-white mb-6">Mail</h1>
+        <h1 class="text-2xl font-bold text-[#f4f4f5] dark:text-white mb-6">Mail</h1>
         <FilterPanel :active-count="Object.keys(getActiveFilters()).length" @search="search" @reset="reset">
             <div class="mb-4">
-                <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Mailable Class</label>
+                <label class="block text-sm font-medium text-[#a1a1aa] dark:text-[#71717a] mb-2">Mailable Class</label>
                 <input v-model="filters.mailable" type="text" placeholder="e.g. App\Mail\WelcomeMail" class="input-field">
             </div>
             <div class="mb-4">
-                <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">To</label>
+                <label class="block text-sm font-medium text-[#a1a1aa] dark:text-[#71717a] mb-2">To</label>
                 <input v-model="filters.mail_to" type="text" placeholder="Recipient email address" class="input-field">
             </div>
             <div class="mb-4">
-                <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Subject</label>
+                <label class="block text-sm font-medium text-[#a1a1aa] dark:text-[#71717a] mb-2">Subject</label>
                 <input v-model="filters.mail_subject" type="text" placeholder="Email subject" class="input-field">
             </div>
             <div class="mb-4">
-                <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Search Content</label>
+                <label class="block text-sm font-medium text-[#a1a1aa] dark:text-[#71717a] mb-2">Search Content</label>
                 <input v-model="filters.content" type="text" placeholder="Search in email content..." class="input-field">
             </div>
             <DateRangeFilter v-model:from="filters.date_from" v-model:to="filters.date_to" />
@@ -96,3 +96,4 @@ onMounted(() => {
     search();
 });
 </script>
+

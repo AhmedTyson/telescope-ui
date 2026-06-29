@@ -1,5 +1,7 @@
-import { ref } from 'vue';
+import { ref, onUnmounted } from 'vue';
 import { apiPost, apiGet } from '../api';
+
+export const isPaused = ref(false);
 
 export function useEntries(type) {
     const entries = ref([]);
@@ -15,6 +17,8 @@ export function useEntries(type) {
 
     const sortBy = ref(null);
     const sortDirection = ref(null);
+    
+    let pollInterval = null;
 
     function setSort(column, direction) {
         sortBy.value = column;
@@ -27,84 +31,85 @@ export function useEntries(type) {
         if (append) {
             loadingMore.value = true;
         } else {
-            loading.value = true;
-            entries.value = [];
-            nextCursor.value = null;
-            totalOffset.value = null;
+            if (!entries.value.length) loading.value = true;
         }
-
         error.value = null;
 
+        const payload = {
+            type,
+            filters,
+            cursor: append ? nextCursor.value : null,
+            total_offset: append ? totalOffset.value : null,
+            sort_by: sortBy.value,
+            sort_direction: sortDirection.value,
+        };
+
         try {
-            const payload = {
-                type,
-                ...filters,
-            };
-
-            if (sortBy.value) {
-                payload.sort_by = sortBy.value;
-                payload.sort_direction = sortDirection.value;
-            }
-
-            const isCustomSort = sortBy.value && sortBy.value !== 'sequence';
-
+            const res = await apiPost('/entries', payload);
             if (append) {
-                if (isCustomSort && totalOffset.value !== null) {
-                    payload.offset = totalOffset.value;
-                } else if (nextCursor.value) {
-                    payload.before_sequence = nextCursor.value;
-                }
-            }
-
-            const result = await apiPost('/entries', payload);
-
-            if (append) {
-                entries.value = [...entries.value, ...result.entries];
+                entries.value = [...entries.value, ...res.data];
             } else {
-                entries.value = result.entries;
+                entries.value = res.data;
             }
-
-            hasMore.value = result.has_more;
-            nextCursor.value = result.next_cursor;
-            totalOffset.value = result.total_offset ?? null;
-        } catch (e) {
-            error.value = e.message;
+            hasMore.value = res.has_more;
+            nextCursor.value = res.next_cursor;
+            totalOffset.value = res.total_offset;
+        } catch (err) {
+            error.value = err.message || 'Error loading entries';
         } finally {
             loading.value = false;
             loadingMore.value = false;
         }
     }
 
-    async function loadMore(filters = {}) {
-        await fetchEntries(filters, true);
+    function loadMore(filters = {}) {
+        if (!hasMore.value || loadingMore.value) return;
+        fetchEntries(filters, true);
     }
 
-    async function toggleDetail(uuid) {
-        if (expandedEntry.value === uuid) {
+    async function toggleDetail(entry) {
+        if (expandedEntry.value === entry.uuid) {
             expandedEntry.value = null;
             entryDetail.value = null;
             return;
         }
 
-        expandedEntry.value = uuid;
+        expandedEntry.value = entry.uuid;
         loadingDetail.value = true;
+        entryDetail.value = null;
 
         try {
-            entryDetail.value = await apiGet(`/entries/${uuid}`);
-        } catch (e) {
-            error.value = e.message;
+            const res = await apiGet(`/entries/${entry.uuid}/detail`);
+            entryDetail.value = res;
+        } catch (err) {
+            // handle
         } finally {
             loadingDetail.value = false;
         }
     }
+
+    function startPolling(filters = {}) {
+        stopPolling();
+        pollInterval = setInterval(() => {
+            if (!isPaused.value && !loadingMore.value && !expandedEntry.value) {
+                fetchEntries(filters, false);
+            }
+        }, 1500); // Fast 1.5s poll
+    }
+
+    function stopPolling() {
+        if (pollInterval) clearInterval(pollInterval);
+    }
+
+    onUnmounted(() => {
+        stopPolling();
+    });
 
     return {
         entries,
         loading,
         loadingMore,
         hasMore,
-        nextCursor,
-        totalOffset,
         error,
         expandedEntry,
         entryDetail,
@@ -115,5 +120,7 @@ export function useEntries(type) {
         fetchEntries,
         loadMore,
         toggleDetail,
+        startPolling,
+        stopPolling
     };
 }

@@ -1,8 +1,8 @@
 <template>
-    <div class="bg-white dark:bg-telescope-card rounded-lg border border-gray-200 dark:border-telescope-border overflow-hidden">
+    <div class="bg-transparent  rounded-lg border border-telescope-border  overflow-hidden">
         <!-- Loading -->
         <div v-if="loading" class="flex items-center justify-center py-16">
-            <div class="flex items-center gap-3 text-gray-500 dark:text-gray-400">
+            <div class="flex items-center gap-3 text-[#a1a1aa] ">
                 <svg class="animate-spin w-5 h-5" fill="none" viewBox="0 0 24 24">
                     <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4" />
                     <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4z" />
@@ -14,35 +14,35 @@
         <!-- Error -->
         <div v-else-if="error" class="flex items-center justify-center py-16">
             <div class="text-center">
-                <p class="text-red-400 text-sm">{{ error }}</p>
+                <p class="text-red-500 text-sm">{{ error }}</p>
                 <button class="mt-2 text-sm text-telescope-accent hover:underline" @click="$emit('retry')">Retry</button>
             </div>
         </div>
 
         <!-- Empty -->
         <div v-else-if="!entries.length" class="flex items-center justify-center py-16">
-            <p class="text-gray-500 text-sm">No entries found</p>
+            <p class="text-[#a1a1aa] text-sm">No entries found</p>
         </div>
 
         <!-- Table -->
         <div v-else class="overflow-x-auto">
             <table class="w-full">
-                <thead class="bg-gray-50 dark:bg-telescope-dark">
+                <thead class="bg-[rgba(255,255,255,0.02)] ">
                     <tr>
                         <th
                             v-for="col in columns"
                             :key="col.key"
                             class="table-header"
                             :class="{
-                                'cursor-pointer select-none hover:bg-gray-100 dark:hover:bg-telescope-border/50 transition-colors': col.sortable,
-                                'bg-gray-100 dark:bg-telescope-border/30': col.sortable && sortBy === col.sortKey
+                                'cursor-pointer select-none hover:bg-gray-100 :bg-telescope-border/50 transition-colors': col.sortable,
+                                'bg-gray-100 /30': col.sortable && sortBy === col.sortKey
                             }"
                             :style="col.width ? { width: col.width } : {}"
                             @click="col.sortable ? $emit('sort', col.sortKey || col.key) : null"
                         >
                             <span class="inline-flex items-center gap-1">
                                 {{ col.label }}
-                                <svg v-if="col.sortable && sortBy !== col.sortKey" class="w-3.5 h-3.5 text-gray-400 dark:text-gray-500 opacity-50" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <svg v-if="col.sortable && sortBy !== col.sortKey" class="w-3.5 h-3.5 text-gray-400 [#a1a1aa] opacity-50" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 16V4m0 0L3 8m4-4l4 4m6 0v12m0 0l4-4m-4 4l-4-4" />
                                 </svg>
                                 <span v-if="col.sortable && sortBy === col.sortKey" class="text-telescope-accent text-xs font-bold">
@@ -56,7 +56,7 @@
                 <tbody>
                     <template v-for="entry in entries" :key="entry.uuid">
                         <tr
-                            class="border-t border-gray-200 dark:border-telescope-border hover:bg-gray-50 dark:hover:bg-telescope-dark/50 cursor-pointer transition-colors"
+                            class="border-t border-telescope-border  hover:bg-[rgba(255,255,255,0.02)] :bg-telescope-dark/50 cursor-pointer transition-colors"
                             @click="$emit('toggle-detail', entry.uuid)"
                         >
                             <td
@@ -85,7 +85,7 @@
                                         Detail
                                     </router-link>
                                     <svg
-                                        class="w-4 h-4 text-gray-500 transition-transform flex-shrink-0"
+                                        class="w-4 h-4 text-[#a1a1aa] transition-transform flex-shrink-0"
                                         :class="{ 'rotate-180': expandedEntry === entry.uuid }"
                                         fill="none"
                                         stroke="currentColor"
@@ -96,7 +96,7 @@
                                 </div>
                             </td>
                         </tr>
-                        <tr v-if="expandedEntry === entry.uuid" class="border-t border-gray-200 dark:border-telescope-border">
+                        <tr v-if="expandedEntry === entry.uuid" class="border-t border-telescope-border ">
                             <td :colspan="columns.length + 1" class="p-0">
                                 <slot name="detail" :entry="entry" :detail="entryDetail" :loading="loadingDetail" />
                             </td>
@@ -148,3 +148,4 @@ function formatValue(value, col) {
     return String(value);
 }
 </script>
+

@@ -19,31 +19,26 @@
 }
 
 @layer components {
-    /* Buttons */
+    /* Buttons with tactile physics */
     .btn-primary {
-        @apply inline-flex items-center justify-center px-4 py-2 bg-telescope-accent text-white dark:text-[#000000] text-sm font-semibold rounded-lg transition-all duration-200 hover:opacity-90 shadow-sm dark:shadow-glow focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-telescope-accent focus-visible:ring-offset-2 focus-visible:ring-offset-[#fafafa] dark:focus-visible:ring-offset-[#000000] disabled:opacity-50 disabled:cursor-not-allowed;
+        @apply inline-flex items-center justify-center px-4 py-2 bg-telescope-accent text-white dark:text-[#000000] text-sm font-semibold rounded-lg transition duration-200 ease-out hover:opacity-90 active:scale-[0.96] shadow-sm dark:shadow-glow outline-none focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-telescope-accent focus-visible:ring-offset-2 focus-visible:ring-offset-white dark:focus-visible:ring-offset-black disabled:opacity-50 disabled:cursor-not-allowed disabled:active:scale-100;
     }
 
     .btn-secondary {
-        @apply inline-flex items-center justify-center px-4 py-2 bg-white dark:bg-[rgba(255,255,255,0.03)] hover:bg-gray-50 dark:hover:bg-[rgba(255,255,255,0.06)] text-[#18181b] dark:text-[#f4f4f5] text-sm font-medium rounded-lg border border-gray-200 dark:border-[#1f1f1f] dark:hover:border-[#333333] transition-all duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gray-300 dark:focus-visible:ring-[#333333] focus-visible:ring-offset-2 focus-visible:ring-offset-[#fafafa] dark:focus-visible:ring-offset-[#000000] disabled:opacity-50 disabled:cursor-not-allowed shadow-sm dark:shadow-none;
+        @apply inline-flex items-center justify-center px-4 py-2 bg-white dark:bg-[rgba(255,255,255,0.03)] hover:bg-gray-50 dark:hover:bg-[rgba(255,255,255,0.08)] text-[#18181b] dark:text-[#f4f4f5] text-sm font-medium rounded-lg border border-gray-200 dark:border-[#1f1f1f] dark:hover:border-[#333333] transition duration-200 ease-out active:scale-[0.97] outline-none focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gray-200 dark:focus-visible:ring-[#1f1f1f] focus-visible:ring-offset-2 focus-visible:ring-offset-white dark:focus-visible:ring-offset-black disabled:opacity-50 disabled:cursor-not-allowed shadow-sm dark:shadow-none disabled:active:scale-100;
+    }
+
+    .action-btn {
+        @apply inline-flex items-center justify-center p-2 rounded-lg text-gray-500 hover:text-gray-900 dark:text-[#a1a1aa] dark:hover:text-[#f4f4f5] hover:bg-gray-100 dark:hover:bg-[rgba(255,255,255,0.08)] transition duration-200 ease-out active:scale-[0.97] outline-none focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gray-200 dark:focus-visible:ring-[#1f1f1f] focus-visible:ring-offset-2 focus-visible:ring-offset-white dark:focus-visible:ring-offset-black disabled:opacity-50 disabled:cursor-not-allowed disabled:active:scale-100;
     }
 
     /* Inputs */
     .input-field {
-        @apply block h-[36px] w-full bg-white dark:bg-[rgba(255,255,255,0.02)] border border-gray-200 dark:border-[#1f1f1f] rounded-lg px-3 py-1.5 text-sm shadow-sm transition-all duration-200 text-[#18181b] dark:text-[#f4f4f5] placeholder:text-gray-400 dark:placeholder:text-[#71717a] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-telescope-accent focus-visible:border-transparent focus-visible:ring-offset-2 focus-visible:ring-offset-[#fafafa] dark:focus-visible:ring-offset-[#000000] disabled:cursor-not-allowed disabled:opacity-50;
+        @apply block h-[36px] w-full bg-white dark:bg-[rgba(255,255,255,0.02)] border border-gray-200 dark:border-[#1f1f1f] rounded-lg px-3 py-1.5 text-sm shadow-sm transition duration-200 ease-out text-[#18181b] dark:text-[#f4f4f5] placeholder:text-gray-400 dark:placeholder:text-[#52525b] hover:border-gray-300 dark:hover:border-[#333333] outline-none focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-telescope-accent focus-visible:ring-offset-2 focus-visible:ring-offset-white dark:focus-visible:ring-offset-black focus-visible:border-transparent disabled:cursor-not-allowed disabled:opacity-50;
     }
 
     .select-field {
-        @apply block h-[36px] w-full bg-white dark:bg-[rgba(255,255,255,0.02)] border border-gray-200 dark:border-[#1f1f1f] rounded-lg px-3 py-1.5 text-sm shadow-sm transition-all duration-200 text-[#18181b] dark:text-[#f4f4f5] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-telescope-accent focus-visible:border-transparent focus-visible:ring-offset-2 focus-visible:ring-offset-[#fafafa] dark:focus-visible:ring-offset-[#000000] appearance-none cursor-pointer disabled:cursor-not-allowed disabled:opacity-50;
-        background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3e%3cpath stroke='%236b7280' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='M6 8l4 4 4-4'/%3e%3c/svg%3e");
-        background-position: right 0.5rem center;
-        background-repeat: no-repeat;
-        background-size: 1.5em 1.5em;
-        padding-right: 2.5rem;
-    }
-    
-    .dark .select-field {
-        background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3e%3cpath stroke='%23a1a1aa' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='M6 8l4 4 4-4'/%3e%3c/svg%3e");
+        @apply block h-[36px] w-full bg-white dark:bg-[rgba(255,255,255,0.02)] border border-gray-200 dark:border-[#1f1f1f] rounded-lg px-3 py-1.5 text-sm shadow-sm transition duration-200 ease-out text-[#18181b] dark:text-[#f4f4f5] hover:border-gray-300 dark:hover:border-[#333333] outline-none focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-telescope-accent focus-visible:ring-offset-2 focus-visible:ring-offset-white dark:focus-visible:ring-offset-black focus-visible:border-transparent appearance-none cursor-pointer disabled:cursor-not-allowed disabled:opacity-50;
     }
     
     select option {
@@ -52,55 +47,63 @@
 
     /* Tables */
     .table-header {
-        @apply h-[38px] px-4 text-left align-middle text-[11px] font-semibold text-gray-500 dark:text-[#a1a1aa] tracking-widest uppercase bg-gray-50 dark:bg-transparent border-b border-gray-200 dark:border-[#1f1f1f] whitespace-nowrap;
+        @apply h-[38px] px-4 text-left align-middle text-[11px] font-semibold text-gray-500 dark:text-[#a1a1aa] tracking-widest uppercase bg-gray-50/80 dark:bg-[rgba(255,255,255,0.01)] border-b border-gray-200 dark:border-[#1f1f1f];
     }
 
     .table-cell {
-        @apply p-4 align-middle border-b border-gray-100 dark:border-[#1f1f1f]/50 text-sm text-gray-600 dark:text-[#a1a1aa] transition-colors duration-200 group-hover:text-gray-900 dark:group-hover:text-[#f4f4f5] whitespace-nowrap;
+        @apply p-4 align-middle border-b border-gray-100 dark:border-[#1f1f1f]/50 text-sm text-gray-600 dark:text-[#a1a1aa] transition-colors duration-200 group-hover:text-gray-900 dark:group-hover:text-[#f4f4f5];
     }
 
     .table-row-hover {
-        @apply hover:bg-gray-50/80 dark:hover:bg-[rgba(255,255,255,0.02)] transition-colors duration-200 cursor-pointer group;
+        @apply hover:bg-gray-50/80 dark:hover:bg-[rgba(255,255,255,0.025)] transition-colors duration-200 cursor-pointer group;
     }
 
     /* Cards */
     .card {
-        @apply rounded-xl border border-gray-200 dark:border-[#1f1f1f] bg-white dark:bg-[#0a0a0a] shadow-sm overflow-hidden;
+        @apply rounded-xl border border-gray-200 dark:border-[#1f1f1f] bg-white dark:bg-[#0a0a0a] shadow-sm overflow-hidden transition duration-300;
     }
 
-    /* Sidebar Links */
+    /* Tactile Sidebar Links */
     .sidebar-link {
-        @apply flex items-center gap-3 px-3 py-2 text-sm font-medium text-gray-500 dark:text-[#a1a1aa] hover:text-gray-900 dark:hover:text-[#f4f4f5] hover:bg-gray-100 dark:hover:bg-[rgba(255,255,255,0.03)] rounded-lg transition-all duration-200;
+        @apply flex items-center gap-3 px-3 py-2 text-sm font-medium text-gray-500 dark:text-[#a1a1aa] hover:text-gray-900 dark:hover:text-[#f4f4f5] hover:bg-gray-100/80 dark:hover:bg-[rgba(255,255,255,0.04)] rounded-lg transition duration-200 ease-out active:scale-[0.97] outline-none focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gray-200 dark:focus-visible:ring-[#1f1f1f] focus-visible:ring-offset-2 focus-visible:ring-offset-white dark:focus-visible:ring-offset-black;
     }
 
     .sidebar-link-active {
-        @apply relative flex items-center gap-3 px-3 py-2 text-sm font-semibold text-telescope-accent dark:text-[#f4f4f5] bg-purple-50 dark:bg-[rgba(255,255,255,0.06)] rounded-lg border border-transparent dark:border-[#1f1f1f] transition-all duration-200;
+        @apply relative flex items-center gap-3 px-3 py-2 text-sm font-semibold text-telescope-accent dark:text-[#f4f4f5] bg-purple-50 dark:bg-[rgba(255,255,255,0.06)] rounded-lg border border-transparent dark:border-[#2a2a2a] transition duration-200 ease-out active:scale-[0.97] shadow-sm overflow-hidden outline-none focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-telescope-accent focus-visible:ring-offset-2 focus-visible:ring-offset-white dark:focus-visible:ring-offset-black;
     }
+    
+    /* Sleek left-border bar instead of a dot */
     .sidebar-link-active::before {
         content: '';
-        @apply absolute left-0 top-1/2 -translate-y-1/2 w-1 h-4 bg-telescope-accent rounded-r-full shadow-none dark:shadow-glow transition-all duration-300 ease-out;
+        @apply absolute left-0 top-0 bottom-0 w-[3px] bg-telescope-accent shadow-none dark:shadow-glow opacity-0 transition-opacity duration-300 ease-out;
+        animation: barFadeIn 0.2s ease-out forwards;
     }
+}
+
+@keyframes barFadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+/* Seamless Page Cross-Fade Transitions */
+.page-fade-enter-active, .page-fade-leave-active {
+    transition: opacity 0.15s ease-in-out;
+}
+.page-fade-enter-from, .page-fade-leave-to {
+    opacity: 0;
 }
 
 /* JSON Viewer */
-.json-key { @apply text-blue-600 dark:text-sky-400 font-mono text-[13px]; }
-.json-string { @apply text-green-600 dark:text-[#10b981] font-mono text-[13px]; }
-.json-number { @apply text-orange-600 dark:text-[#f59e0b] font-mono text-[13px]; }
-.json-boolean { @apply text-purple-600 dark:text-telescope-accent font-mono text-[13px]; }
-.json-null { @apply text-gray-400 dark:text-[#52525b] font-mono text-[13px]; }
+.json-key { @apply text-blue-600 dark:text-sky-400 font-mono text-[13px] transition-colors; }
+.json-string { @apply text-green-600 dark:text-[#10b981] font-mono text-[13px] transition-colors; }
+.json-number { @apply text-orange-600 dark:text-[#f59e0b] font-mono text-[13px] transition-colors; }
+.json-boolean { @apply text-purple-600 dark:text-telescope-accent font-mono text-[13px] transition-colors; }
+.json-null { @apply text-gray-400 dark:text-[#52525b] font-mono text-[13px] transition-colors; }
 
-::-webkit-scrollbar { width: 4px; height: 4px; }
+::-webkit-scrollbar { width: 5px; height: 5px; }
 ::-webkit-scrollbar-track { @apply bg-transparent; }
 ::-webkit-scrollbar-thumb { @apply bg-gray-200 dark:bg-[#333333] rounded-full hover:bg-gray-300 dark:hover:bg-[#52525b] transition-colors; }
 
-input[type="datetime-local"]::-webkit-calendar-picker-indicator,
-input[type="date"]::-webkit-calendar-picker-indicator,
-input[type="time"]::-webkit-calendar-picker-indicator {
+input[type="datetime-local"]::-webkit-calendar-picker-indicator {
     @apply opacity-50 hover:opacity-100 cursor-pointer transition-opacity duration-200;
-}
-
-.dark input[type="datetime-local"]::-webkit-calendar-picker-indicator,
-.dark input[type="date"]::-webkit-calendar-picker-indicator,
-.dark input[type="time"]::-webkit-calendar-picker-indicator {
-    filter: invert(1);
 }

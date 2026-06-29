@@ -1,17 +1,17 @@
 <template>
     <div>
-        <h1 class="text-2xl font-bold text-gray-900 dark:text-white mb-6">Requests</h1>
+        <h1 class="text-2xl font-bold text-[#f4f4f5] dark:text-white mb-6">Requests</h1>
 
         <FilterPanel :active-count="Object.keys(getActiveFilters()).length" @search="search" @reset="reset">
             <!-- Method -->
             <div>
-                <label class="block text-xs font-medium text-gray-500 dark:text-gray-400 mb-1">Method</label>
+                <label class="block text-xs font-medium text-[#a1a1aa] dark:text-[#71717a] mb-1">Method</label>
                 <div class="flex flex-wrap gap-2">
-                    <label v-for="m in ['GET','POST','PUT','PATCH','DELETE']" :key="m" class="flex items-center gap-1.5 text-sm text-gray-700 dark:text-gray-300">
+                    <label v-for="m in ['GET','POST','PUT','PATCH','DELETE']" :key="m" class="flex items-center gap-1.5 text-sm text-[#a1a1aa] dark:text-[#71717a]">
                         <input
                             type="checkbox"
                             :checked="filters.methods?.includes(m)"
-                            class="rounded bg-white dark:bg-telescope-dark border-gray-300 dark:border-telescope-border text-telescope-accent focus:ring-telescope-accent"
+                            class="rounded bg-transparent  border-telescope-border  text-telescope-accent focus:ring-telescope-accent"
                             @change="toggleMethod(m)"
                         />
                         {{ m }}
@@ -21,25 +21,25 @@
 
             <!-- URI -->
             <div>
-                <label class="block text-xs font-medium text-gray-500 dark:text-gray-400 mb-1">URI</label>
+                <label class="block text-xs font-medium text-[#a1a1aa] dark:text-[#71717a] mb-1">URI</label>
                 <input v-model="filters.uri" type="text" class="input-field" placeholder="/api/v1/..." />
             </div>
 
             <!-- Content Search -->
             <div>
-                <label class="block text-xs font-medium text-gray-500 dark:text-gray-400 mb-1">Content Search</label>
+                <label class="block text-xs font-medium text-[#a1a1aa] dark:text-[#71717a] mb-1">Content Search</label>
                 <input v-model="filters.content" type="text" class="input-field" placeholder="Search in request/response..." />
             </div>
 
             <!-- Status -->
             <div>
-                <label class="block text-xs font-medium text-gray-500 dark:text-gray-400 mb-1">Status</label>
+                <label class="block text-xs font-medium text-[#a1a1aa] dark:text-[#71717a] mb-1">Status</label>
                 <div class="flex flex-wrap gap-2">
-                    <label v-for="s in ['2xx','3xx','4xx','5xx']" :key="s" class="flex items-center gap-1.5 text-sm text-gray-700 dark:text-gray-300">
+                    <label v-for="s in ['2xx','3xx','4xx','5xx']" :key="s" class="flex items-center gap-1.5 text-sm text-[#a1a1aa] dark:text-[#71717a]">
                         <input
                             type="checkbox"
                             :checked="filters.statuses?.includes(s)"
-                            class="rounded bg-white dark:bg-telescope-dark border-gray-300 dark:border-telescope-border text-telescope-accent focus:ring-telescope-accent"
+                            class="rounded bg-transparent  border-telescope-border  text-telescope-accent focus:ring-telescope-accent"
                             @change="toggleStatus(s)"
                         />
                         {{ s }}
@@ -49,13 +49,13 @@
 
             <!-- Min Duration -->
             <div>
-                <label class="block text-xs font-medium text-gray-500 dark:text-gray-400 mb-1">Min Duration (ms)</label>
+                <label class="block text-xs font-medium text-[#a1a1aa] dark:text-[#71717a] mb-1">Min Duration (ms)</label>
                 <input v-model.number="filters.min_duration" type="number" class="input-field" placeholder="500" />
             </div>
 
             <!-- Route Group -->
             <div>
-                <label class="block text-xs font-medium text-gray-500 dark:text-gray-400 mb-1">Route Group</label>
+                <label class="block text-xs font-medium text-[#a1a1aa] dark:text-[#71717a] mb-1">Route Group</label>
                 <select v-model="filters.route_group" class="select-field">
                     <option :value="null">All</option>
                     <option value="api">API</option>
@@ -66,7 +66,7 @@
 
             <!-- User Email / Auth ID / User ID -->
             <div>
-                <label class="block text-xs font-medium text-gray-500 dark:text-gray-400 mb-1">Email / Auth ID / User ID</label>
+                <label class="block text-xs font-medium text-[#a1a1aa] dark:text-[#71717a] mb-1">Email / Auth ID / User ID</label>
                 <input v-model="filters.user_email" type="text" class="input-field" placeholder="email, auth ID or user ID..." />
             </div>
 
@@ -98,12 +98,12 @@
             <template #cell-content.user="{ value }">
                 <div v-if="value" class="truncate">
                     <span class="block truncate" :title="value.email">{{ value.email || '-' }}</span>
-                    <span v-if="value.id" class="block truncate text-xs text-gray-400 dark:text-gray-500" :title="value.id">{{ value.id }}</span>
+                    <span v-if="value.id" class="block truncate text-xs text-[#71717a] dark:text-[#a1a1aa]" :title="value.id">{{ value.id }}</span>
                 </div>
                 <span v-else>-</span>
             </template>
             <template #cell-content.duration="{ value }">
-                <span :class="value > 1000 ? 'text-red-400' : value > 500 ? 'text-yellow-400' : 'text-gray-300'">
+                <span :class="value > 1000 ? 'text-red-400' : value > 500 ? 'text-yellow-400' : 'text-[#71717a]'">
                     {{ value ? `${Number(value).toFixed(2)} ms` : '-' }}
                 </span>
             </template>
@@ -183,19 +183,20 @@ function handleSort(column) {
     } else {
         setSort(column, 'desc');
     }
-    fetchEntries(getActiveFilters());
+    
     syncToUrl();
 }
 
 function search() {
-    fetchEntries(getActiveFilters());
+    startPolling(getActiveFilters());
+    
     syncToUrl();
 }
 
 function reset() {
     resetFilters();
     setSort(null, null);
-    fetchEntries({});
+    startPolling({});
     syncToUrl();
 }
 
@@ -204,3 +205,5 @@ onMounted(() => {
     search();
 });
 </script>
+
+

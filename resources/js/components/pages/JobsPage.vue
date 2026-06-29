@@ -1,10 +1,10 @@
 <template>
   <div>
-    <h1 class="text-2xl font-bold text-gray-900 dark:text-white mb-6">Jobs</h1>
+    <h1 class="text-2xl font-bold text-[#f4f4f5] dark:text-white mb-6">Jobs</h1>
 
     <FilterPanel :active-count="Object.keys(getActiveFilters()).length" @search="search" @reset="reset">
       <div>
-        <label class="block text-xs font-medium text-gray-500 dark:text-gray-400 mb-1">Job Name</label>
+        <label class="block text-xs font-medium text-[#a1a1aa] dark:text-[#71717a] mb-1">Job Name</label>
         <input
           v-model="filters.job_name"
           type="text"
@@ -14,7 +14,7 @@
       </div>
 
       <div>
-        <label class="block text-xs font-medium text-gray-500 dark:text-gray-400 mb-1">Job Status</label>
+        <label class="block text-xs font-medium text-[#a1a1aa] dark:text-[#71717a] mb-1">Job Status</label>
         <select v-model="filters.job_status" class="select-field">
           <option value="">All</option>
           <option value="pending">Pending</option>
@@ -24,7 +24,7 @@
       </div>
 
       <div>
-        <label class="block text-xs font-medium text-gray-500 dark:text-gray-400 mb-1">Content</label>
+        <label class="block text-xs font-medium text-[#a1a1aa] dark:text-[#71717a] mb-1">Content</label>
         <input
           v-model="filters.content"
           type="text"
@@ -134,3 +134,4 @@ onMounted(() => {
   search();
 });
 </script>
+

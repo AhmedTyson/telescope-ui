@@ -1,9 +1,9 @@
 <template>
     <div>
-        <h1 class="text-2xl font-bold text-gray-900 dark:text-white mb-6">Client Requests</h1>
+        <h1 class="text-2xl font-bold text-[#f4f4f5] dark:text-white mb-6">Client Requests</h1>
         <FilterPanel :active-count="Object.keys(getActiveFilters()).length" @search="search" @reset="reset">
             <div class="mb-4">
-                <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Method</label>
+                <label class="block text-sm font-medium text-[#a1a1aa] dark:text-[#71717a] mb-2">Method</label>
                 <select
                     v-model="filters.client_method"
                     class="select-field"
@@ -17,7 +17,7 @@
                 </select>
             </div>
             <div class="mb-4">
-                <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">URI</label>
+                <label class="block text-sm font-medium text-[#a1a1aa] dark:text-[#71717a] mb-2">URI</label>
                 <input
                     v-model="filters.client_uri"
                     type="text"
@@ -26,13 +26,13 @@
                 />
             </div>
             <div class="mb-4">
-                <label class="block text-xs font-medium text-gray-500 dark:text-gray-400 mb-1">Status</label>
+                <label class="block text-xs font-medium text-[#a1a1aa] dark:text-[#71717a] mb-1">Status</label>
                 <div class="flex flex-wrap gap-2">
-                    <label v-for="s in ['2xx','3xx','4xx','5xx']" :key="s" class="flex items-center gap-1.5 text-sm text-gray-700 dark:text-gray-300">
+                    <label v-for="s in ['2xx','3xx','4xx','5xx']" :key="s" class="flex items-center gap-1.5 text-sm text-[#a1a1aa] dark:text-[#71717a]">
                         <input
                             type="checkbox"
                             :checked="filters.client_statuses?.includes(s)"
-                            class="rounded bg-white dark:bg-telescope-dark border-gray-300 dark:border-telescope-border text-telescope-accent focus:ring-telescope-accent"
+                            class="rounded bg-transparent  border-telescope-border  text-telescope-accent focus:ring-telescope-accent"
                             @change="toggleClientStatus(s)"
                         />
                         {{ s }}
@@ -40,7 +40,7 @@
                 </div>
             </div>
             <div class="mb-4">
-                <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Min Duration (ms)</label>
+                <label class="block text-sm font-medium text-[#a1a1aa] dark:text-[#71717a] mb-2">Min Duration (ms)</label>
                 <input
                     v-model.number="filters.min_duration"
                     type="number"
@@ -49,7 +49,7 @@
                 />
             </div>
             <div class="mb-4">
-                <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Content Search</label>
+                <label class="block text-sm font-medium text-[#a1a1aa] dark:text-[#71717a] mb-2">Content Search</label>
                 <input
                     v-model="filters.content"
                     type="text"
@@ -178,3 +178,4 @@ onMounted(() => {
     search();
 });
 </script>
+

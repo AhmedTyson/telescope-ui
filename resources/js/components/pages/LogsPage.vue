@@ -1,9 +1,9 @@
 <template>
     <div>
-        <h1 class="text-2xl font-bold text-gray-900 dark:text-white mb-6">Logs</h1>
+        <h1 class="text-2xl font-bold text-[#f4f4f5] dark:text-white mb-6">Logs</h1>
         <FilterPanel :active-count="Object.keys(getActiveFilters()).length" @search="search" @reset="reset">
             <div class="mb-4">
-                <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Log Level</label>
+                <label class="block text-sm font-medium text-[#a1a1aa] dark:text-[#71717a] mb-2">Log Level</label>
                 <select v-model="filters.log_level" class="select-field">
                     <option value="">All Levels</option>
                     <option value="emergency">Emergency</option>
@@ -17,7 +17,7 @@
                 </select>
             </div>
             <div class="mb-4">
-                <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Search Content</label>
+                <label class="block text-sm font-medium text-[#a1a1aa] dark:text-[#71717a] mb-2">Search Content</label>
                 <input v-model="filters.content" type="text" placeholder="Search in log messages..." class="input-field">
             </div>
             <DateRangeFilter v-model:from="filters.date_from" v-model:to="filters.date_to" />
@@ -95,3 +95,4 @@ onMounted(() => {
     search();
 });
 </script>
+

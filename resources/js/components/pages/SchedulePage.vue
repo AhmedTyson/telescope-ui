@@ -1,14 +1,14 @@
 <template>
     <div>
-        <h1 class="text-2xl font-bold text-gray-900 dark:text-white mb-6">Schedule</h1>
+        <h1 class="text-2xl font-bold text-[#f4f4f5] dark:text-white mb-6">Schedule</h1>
         <FilterPanel :active-count="Object.keys(getActiveFilters()).length" @search="search" @reset="reset">
             <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <div>
-                    <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Schedule Command</label>
+                    <label class="block text-sm font-medium text-[#a1a1aa] dark:text-[#71717a] mb-2">Schedule Command</label>
                     <input v-model="filters.schedule_command" type="text" placeholder="Search by command..." class="input-field">
                 </div>
                 <div>
-                    <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Content Search</label>
+                    <label class="block text-sm font-medium text-[#a1a1aa] dark:text-[#71717a] mb-2">Content Search</label>
                     <input v-model="filters.content" type="text" placeholder="Search content..." class="input-field">
                 </div>
             </div>
@@ -85,3 +85,4 @@ onMounted(() => {
     search();
 });
 </script>
+

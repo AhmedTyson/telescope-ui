@@ -1,9 +1,9 @@
 <template>
     <div>
-        <h1 class="text-2xl font-bold text-gray-900 dark:text-white mb-6">Redis</h1>
+        <h1 class="text-2xl font-bold text-[#f4f4f5] dark:text-white mb-6">Redis</h1>
         <FilterPanel :active-count="Object.keys(getActiveFilters()).length" @search="search" @reset="reset">
             <div class="mb-4">
-                <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Command</label>
+                <label class="block text-sm font-medium text-[#a1a1aa] dark:text-[#71717a] mb-2">Command</label>
                 <input
                     v-model="filters.redis_command"
                     type="text"
@@ -12,7 +12,7 @@
                 />
             </div>
             <div class="mb-4">
-                <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Min Duration (ms)</label>
+                <label class="block text-sm font-medium text-[#a1a1aa] dark:text-[#71717a] mb-2">Min Duration (ms)</label>
                 <input
                     v-model.number="filters.min_duration"
                     type="number"
@@ -21,7 +21,7 @@
                 />
             </div>
             <div class="mb-4">
-                <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Content Search</label>
+                <label class="block text-sm font-medium text-[#a1a1aa] dark:text-[#71717a] mb-2">Content Search</label>
                 <input
                     v-model="filters.content"
                     type="text"
@@ -133,3 +133,4 @@ onMounted(() => {
     search();
 });
 </script>
+
