@@ -137,7 +137,7 @@ import LoadMore from '../shared/LoadMore.vue';
 import Badge from '../shared/Badge.vue';
 import DateRangeFilter from '../shared/DateRangeFilter.vue';
 
-const { entries, loading, loadingMore, hasMore, error, expandedEntry, entryDetail, loadingDetail, fetchEntries, loadMore, toggleDetail, sortBy, sortDirection, setSort } = useEntries('request');
+const { entries, loading, loadingMore, hasMore, error, expandedEntry, entryDetail, loadingDetail, fetchEntries, loadMore, toggleDetail, sortBy, sortDirection, setSort, startPolling, stopPolling } = useEntries('request');
 const { filters, getActiveFilters, resetFilters } = useFilters({
     methods: [],
     uri: null,

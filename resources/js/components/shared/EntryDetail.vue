@@ -41,6 +41,21 @@
                 <div v-else-if="activeTab === 'content' && detail.type === 'query'" class="font-mono text-[13px] leading-relaxed whitespace-pre-wrap text-[#f4f4f5]" v-html="highlightSQL(detail.content.sql)">
                 </div>
 
+                <!-- Query Bindings Renderer -->
+                <div v-else-if="activeTab === 'bindings' && detail.type === 'query'">
+                    <div v-if="!detail.content.bindings || detail.content.bindings.length === 0"
+                         class="text-[#71717a] text-sm font-mono italic">
+                        No bindings — query uses no parameters.
+                    </div>
+                    <div v-else class="space-y-1">
+                        <div v-for="(val, idx) in detail.content.bindings" :key="idx"
+                             class="flex items-baseline gap-3 font-mono text-sm">
+                            <span class="text-[#a855f7] w-6 text-right flex-shrink-0">{{ idx + 1 }}</span>
+                            <span class="text-[#f4f4f5]">{{ val }}</span>
+                        </div>
+                    </div>
+                </div>
+
                 <!-- Exception Trace Renderer -->
                 <div v-else-if="activeTab === 'trace' && detail.type === 'exception'" class="space-y-1">
                     <div v-for="(frame, i) in detail.content.trace" :key="i" class="p-2 rounded font-mono text-[12px] break-all" :class="frame.file && frame.file.includes('/vendor/') ? 'text-[#71717a] bg-transparent' : 'text-[#f4f4f5] bg-[rgba(255,255,255,0.03)] border border-telescope-border/50'">

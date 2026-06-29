@@ -88,7 +88,7 @@ import Badge from './Badge.vue';
 
 const props = defineProps({
     batchByType: { type: Object, required: true },
-    batchTypes: { type: Array, required: true },
+    batchTypes: { type: Array, default: () => [] },
     batchCount: { type: Number, default: 0 },
 });
 
