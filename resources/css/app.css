@@ -1,0 +1,93 @@
+@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&family=Inter:wght@400;500;600&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+    body {
+        @apply bg-telescope-darker text-gray-100 font-sans antialiased;
+        font-family: 'Inter', system-ui, sans-serif;
+    }
+    * {
+        @apply border-telescope-border;
+    }
+}
+
+@layer components {
+    .btn-primary {
+        @apply inline-flex items-center gap-1.5 px-3 py-1.5 bg-telescope-accent text-telescope-darker text-xs font-semibold rounded-md transition-all duration-150 hover:bg-telescope-accent-light shadow-sm;
+    }
+
+    .btn-secondary {
+        @apply inline-flex items-center gap-1.5 px-3 py-1.5 bg-telescope-card hover:bg-telescope-border text-gray-300 text-xs font-medium rounded-md border border-telescope-border transition-all duration-150;
+    }
+
+    .input-field {
+        @apply w-full bg-telescope-dark border border-telescope-border rounded-md px-3 py-2 text-sm text-gray-200 placeholder-telescope-muted focus:outline-none focus:ring-1 focus:ring-telescope-accent focus:border-telescope-accent transition-all duration-150;
+    }
+
+    .select-field {
+        @apply w-full bg-telescope-dark border border-telescope-border rounded-md px-3 py-2 text-sm text-gray-200 focus:outline-none focus:ring-1 focus:ring-telescope-accent focus:border-telescope-accent appearance-none transition-all duration-150;
+    }
+
+    .table-header {
+        @apply px-4 py-2.5 text-left text-[10px] font-semibold text-telescope-muted uppercase tracking-widest bg-telescope-dark border-b border-telescope-border;
+    }
+
+    .table-cell {
+        @apply px-4 py-3 text-sm text-gray-300 border-b border-telescope-border/50;
+    }
+
+    .table-row-hover {
+        @apply hover:bg-telescope-card/60 cursor-pointer transition-colors duration-100;
+    }
+
+    .card {
+        @apply bg-telescope-card border border-telescope-border rounded-lg;
+    }
+
+    .sidebar-link {
+        @apply flex items-center gap-3 px-3 py-2 text-xs font-medium text-telescope-muted hover:text-gray-100 hover:bg-telescope-card rounded-md transition-all duration-150;
+    }
+
+    .sidebar-link-active {
+        @apply flex items-center gap-3 px-3 py-2 text-xs font-semibold text-telescope-darker bg-telescope-accent rounded-md shadow-sm shadow-telescope-accent/30;
+    }
+
+    .badge {
+        @apply inline-flex items-center px-1.5 py-0.5 rounded text-[10px] font-semibold uppercase tracking-wide;
+    }
+
+    .badge-green  { @apply bg-emerald-500/15 text-emerald-400; }
+    .badge-red    { @apply bg-red-500/15 text-red-400; }
+    .badge-yellow { @apply bg-amber-500/15 text-amber-400; }
+    .badge-blue   { @apply bg-sky-500/15 text-sky-400; }
+    .badge-gray   { @apply bg-telescope-border text-telescope-muted; }
+}
+
+/* JSON viewer */
+.json-key     { @apply text-sky-400; font-family: 'JetBrains Mono', monospace; }
+.json-string  { @apply text-emerald-400; font-family: 'JetBrains Mono', monospace; }
+.json-number  { @apply text-amber-400; font-family: 'JetBrains Mono', monospace; }
+.json-boolean { @apply text-violet-400; font-family: 'JetBrains Mono', monospace; }
+.json-null    { @apply text-telescope-muted; font-family: 'JetBrains Mono', monospace; }
+
+/* Scrollbar */
+::-webkit-scrollbar { width: 4px; height: 4px; }
+::-webkit-scrollbar-track { @apply bg-telescope-darker; }
+::-webkit-scrollbar-thumb { @apply bg-telescope-border rounded-full; }
+::-webkit-scrollbar-thumb:hover { @apply bg-telescope-muted; }
+
+/* Glow accent line on top of sidebar active */
+.sidebar-link-active::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 3px;
+    height: 60%;
+    background: theme('colors.telescope.accent');
+    border-radius: 0 2px 2px 0;
+}
