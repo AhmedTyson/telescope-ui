@@ -80,7 +80,7 @@ export function useEntries(type) {
 
         try {
             const res = await apiGet(`/entries/${uuid}/detail`);
-            entryDetail.value = res;
+            entryDetail.value = res.entry ?? res;
         } catch (err) {
             // handle
         } finally {
