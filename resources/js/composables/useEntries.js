@@ -67,19 +67,19 @@ export function useEntries(type) {
         fetchEntries(filters, true);
     }
 
-    async function toggleDetail(entry) {
-        if (expandedEntry.value === entry.uuid) {
+    async function toggleDetail(uuid) {
+        if (expandedEntry.value === uuid) {
             expandedEntry.value = null;
             entryDetail.value = null;
             return;
         }
 
-        expandedEntry.value = entry.uuid;
+        expandedEntry.value = uuid;
         loadingDetail.value = true;
         entryDetail.value = null;
 
         try {
-            const res = await apiGet(`/entries/${entry.uuid}/detail`);
+            const res = await apiGet(`/entries/${uuid}/detail`);
             entryDetail.value = res;
         } catch (err) {
             // handle
