@@ -14,6 +14,12 @@ return new class extends Migration
     public function up(): void
     {
         $connection = $this->getConnection();
+        
+        // Skip on SQLite
+        if (DB::connection($connection)->getDriverName() === 'sqlite') {
+            return;
+        }
+
         $prefix = DB::connection($connection)->getTablePrefix();
         $table = $prefix . 'telescope_entries';
 
@@ -44,6 +50,12 @@ return new class extends Migration
     public function down(): void
     {
         $connection = $this->getConnection();
+        
+        // Skip on SQLite
+        if (DB::connection($connection)->getDriverName() === 'sqlite') {
+            return;
+        }
+
         $prefix = DB::connection($connection)->getTablePrefix();
         $table = $prefix . 'telescope_entries';
 

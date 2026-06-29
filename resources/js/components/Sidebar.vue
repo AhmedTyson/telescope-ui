@@ -1,77 +1,53 @@
 <template>
     <aside
-        class="fixed top-0 left-0 h-full bg-telescope-sidebar border-r border-telescope-border z-30 transition-all duration-200 flex flex-col"
-        :class="collapsed ? 'w-14' : 'w-56'"
+        class="fixed top-0 left-0 h-full bg-white dark:bg-telescope-sidebar border-r border-gray-200 dark:border-telescope-border z-30 transition-all duration-300 ease-in-out flex flex-col"
+        :class="[
+            collapsed ? '-translate-x-full lg:translate-x-0 lg:w-16' : 'translate-x-0 w-64'
+        ]"
     >
-        <!-- Logo / Brand -->
-        <div class="flex items-center justify-between px-3 py-4 border-b border-telescope-border">
-            <div v-if="!collapsed" class="flex items-center gap-2">
-                <div class="w-6 h-6 rounded bg-telescope-accent flex items-center justify-center flex-shrink-0">
-                    <svg class="w-3.5 h-3.5 text-telescope-darker" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" d="M2.036 12.322a1.012 1.012 0 0 1 0-.639C3.423 7.51 7.36 4.5 12 4.5c4.638 0 8.573 3.007 9.963 7.178.07.207.07.431 0 .639C20.577 16.49 16.64 19.5 12 19.5c-4.638 0-8.573-3.007-9.963-7.178Z" />
-                        <path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" />
-                    </svg>
-                </div>
-                <span class="text-sm font-semibold text-white tracking-tight">Telescope</span>
-            </div>
-            <div v-else class="w-6 h-6 rounded bg-telescope-accent flex items-center justify-center mx-auto">
-                <svg class="w-3.5 h-3.5 text-telescope-darker" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" d="M2.036 12.322a1.012 1.012 0 0 1 0-.639C3.423 7.51 7.36 4.5 12 4.5c4.638 0 8.573 3.007 9.963 7.178.07.207.07.431 0 .639C20.577 16.49 16.64 19.5 12 19.5c-4.638 0-8.573-3.007-9.963-7.178Z" />
-                    <path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" />
-                </svg>
-            </div>
+        <!-- Header -->
+        <div class="flex items-center justify-between p-4 border-b border-gray-200 dark:border-telescope-border">
+            <span v-if="!collapsed" class="text-lg font-semibold text-gray-900 dark:text-white truncate">Telescope</span>
             <button
-                v-if="!collapsed"
-                class="p-1 text-telescope-muted hover:text-gray-200 rounded transition-colors"
+                class="p-1 text-gray-500 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white rounded transition-colors"
                 @click="$emit('toggle')"
             >
-                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 19l-7-7 7-7m8 14l-7-7 7-7" />
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path v-if="collapsed" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 5l7 7-7 7M5 5l7 7-7 7" />
+                    <path v-else stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 19l-7-7 7-7m8 14l-7-7 7-7" />
                 </svg>
             </button>
-            <button
-                v-else
-                class="p-1 text-telescope-muted hover:text-gray-200 rounded transition-colors mx-auto mt-2"
-                @click="$emit('toggle')"
-            >
-                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 5l7 7-7 7M5 5l7 7-7 7" />
-                </svg>
-            </button>
-        </div>
-
-        <!-- Section label -->
-        <div v-if="!collapsed" class="px-3 pt-4 pb-1">
-            <span class="text-[10px] font-semibold text-telescope-muted uppercase tracking-widest">Monitoring</span>
         </div>
 
         <!-- Navigation -->
-        <nav class="flex-1 overflow-y-auto px-2 pb-2 space-y-0.5">
+        <nav class="flex-1 overflow-y-auto p-2 space-y-0.5">
             <router-link
                 v-for="item in navItems"
                 :key="item.route"
                 :to="item.route"
-                :class="isActive(item.route) ? 'sidebar-link-active relative' : 'sidebar-link'"
+                :class="isActive(item.route) ? 'sidebar-link-active' : 'sidebar-link'"
                 :title="collapsed ? item.label : ''"
             >
-                <svg class="w-4 h-4 flex-shrink-0" fill="none" stroke="currentColor" stroke-width="1.75" viewBox="0 0 24 24">
+                <svg class="w-5 h-5 flex-shrink-0" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" :d="item.icon" />
                 </svg>
                 <span v-if="!collapsed" class="truncate">{{ item.label }}</span>
             </router-link>
         </nav>
 
-        <!-- Footer -->
-        <div class="px-2 py-2 border-t border-telescope-border">
+        <!-- Theme Toggle -->
+        <div class="p-2 border-t border-gray-200 dark:border-telescope-border">
             <button
-                class="flex items-center gap-3 w-full px-3 py-2 text-xs text-telescope-muted hover:text-gray-200 hover:bg-telescope-card rounded-md transition-colors duration-150"
+                class="flex items-center gap-3 w-full px-4 py-2.5 text-sm text-gray-600 hover:text-gray-900 hover:bg-gray-100 dark:text-gray-400 dark:hover:text-white dark:hover:bg-telescope-card rounded-md transition-colors duration-150"
                 :title="collapsed ? (isDark ? 'Light mode' : 'Dark mode') : ''"
                 @click="toggleTheme"
             >
-                <svg v-if="isDark" class="w-4 h-4 flex-shrink-0" fill="none" stroke="currentColor" stroke-width="1.75" viewBox="0 0 24 24">
+                <!-- Sun icon (shown in dark mode) -->
+                <svg v-if="isDark" class="w-5 h-5 flex-shrink-0" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" d="M12 3v2.25m6.364.386-1.591 1.591M21 12h-2.25m-.386 6.364-1.591-1.591M12 18.75V21m-4.773-4.227-1.591 1.591M5.25 12H3m4.227-4.773L5.636 5.636M15.75 12a3.75 3.75 0 1 1-7.5 0 3.75 3.75 0 0 1 7.5 0Z" />
                 </svg>
-                <svg v-else class="w-4 h-4 flex-shrink-0" fill="none" stroke="currentColor" stroke-width="1.75" viewBox="0 0 24 24">
+                <!-- Moon icon (shown in light mode) -->
+                <svg v-else class="w-5 h-5 flex-shrink-0" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" d="M21.752 15.002A9.72 9.72 0 0 1 18 15.75c-5.385 0-9.75-4.365-9.75-9.75 0-1.33.266-2.597.748-3.752A9.753 9.753 0 0 0 3 11.25C3 16.635 7.365 21 12.75 21a9.753 9.753 0 0 0 9.002-5.998Z" />
                 </svg>
                 <span v-if="!collapsed" class="truncate">{{ isDark ? 'Light mode' : 'Dark mode' }}</span>

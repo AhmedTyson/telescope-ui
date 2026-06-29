@@ -9,20 +9,22 @@ export default {
         extend: {
             colors: {
                 telescope: {
-                    dark: '#0f1117',
-                    darker: '#090c12',
-                    sidebar: '#0d1117',
-                    card: '#161b27',
-                    border: '#21293d',
-                    accent: '#38bdf8',
-                    'accent-light': '#7dd3fc',
-                    'accent-dim': '#0c4a6e',
-                    muted: '#8b98b8',
+                    accent: '#a855f7',
+                    'accent-light': '#c084fc',
+                    border: '#1f1f1f',
+                    card: '#0a0a0a',
+                    dark: '#000000',
+                    darker: '#000000',
+                    sidebar: '#0a0a0a'
                 },
             },
             fontFamily: {
-                mono: ['JetBrains Mono', 'Fira Code', 'monospace'],
+                sans: ['Inter', '-apple-system', 'sans-serif'],
+                mono: ['JetBrains Mono', 'monospace'],
             },
+            boxShadow: {
+                'glow': '0 0 15px -3px rgba(168, 85, 247, 0.25)',
+            }
         },
     },
     plugins: [],
