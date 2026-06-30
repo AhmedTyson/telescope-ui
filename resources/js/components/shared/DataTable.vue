@@ -1,5 +1,5 @@
 <template>
-    <div class="bg-transparent  rounded-lg border border-telescope-border  overflow-hidden">
+    <div class="bg-white dark:bg-transparent rounded-lg border border-gray-200 dark:border-telescope-border overflow-hidden">
         <!-- Loading -->
         <div v-if="loading" class="flex items-center justify-center py-16">
             <div class="flex items-center gap-3 text-[#a1a1aa] ">
@@ -27,15 +27,15 @@
         <!-- Table -->
         <div v-else class="overflow-x-auto">
             <table class="w-full">
-                <thead class="bg-[rgba(255,255,255,0.02)] ">
+                <thead class="bg-gray-50 dark:bg-[rgba(255,255,255,0.02)]">
                     <tr>
                         <th
                             v-for="col in columns"
                             :key="col.key"
-                            class="table-header"
+                            class="table-header text-gray-500 dark:text-[#a1a1aa]"
                             :class="{
-                                'cursor-pointer select-none hover:bg-gray-100 :bg-telescope-border/50 transition-colors': col.sortable,
-                                'bg-gray-100 /30': col.sortable && sortBy === col.sortKey
+                                'cursor-pointer select-none hover:bg-gray-100 dark:hover:bg-telescope-border/50 transition-colors': col.sortable,
+                                'bg-gray-100 dark:bg-gray-800/30': col.sortable && sortBy === col.sortKey
                             }"
                             :style="col.width ? { width: col.width } : {}"
                             @click="col.sortable ? $emit('sort', col.sortKey || col.key) : null"
@@ -56,7 +56,7 @@
                 <tbody>
                     <template v-for="entry in entries" :key="entry.uuid">
                         <tr
-                            class="border-t border-telescope-border  hover:bg-[rgba(255,255,255,0.02)] :bg-telescope-dark/50 cursor-pointer transition-colors"
+                            class="border-t border-gray-200 dark:border-telescope-border hover:bg-gray-50 dark:hover:bg-[rgba(255,255,255,0.02)] cursor-pointer transition-colors text-gray-900 dark:text-gray-300"
                             @click="$emit('toggle-detail', entry.uuid)"
                         >
                             <td
@@ -96,7 +96,7 @@
                                 </div>
                             </td>
                         </tr>
-                        <tr v-if="expandedEntry === entry.uuid" class="border-t border-telescope-border ">
+                        <tr v-if="expandedEntry === entry.uuid" class="border-t border-gray-200 dark:border-telescope-border bg-gray-50 dark:bg-transparent">
                             <td :colspan="columns.length + 1" class="p-0">
                                 <slot name="detail" :entry="entry" :detail="entryDetail" :loading="loadingDetail" />
                             </td>

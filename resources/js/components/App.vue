@@ -1,10 +1,10 @@
 <template>
-    <div class="flex h-screen overflow-hidden bg-telescope-darker transition-colors duration-200" @keydown.window="handleHotkey">
+    <div class="flex h-screen overflow-hidden bg-gray-50 dark:bg-telescope-darker text-gray-900 dark:text-gray-300 transition-colors duration-200" @keydown.window="handleHotkey">
         <Sidebar :collapsed="sidebarCollapsed" @toggle="sidebarCollapsed = !sidebarCollapsed" />
 
         <div class="flex-1 flex flex-col min-w-0 transition-all duration-300" :class="sidebarCollapsed ? 'ml-16' : 'ml-64'">
             <!-- Top Header -->
-            <header class="h-14 flex items-center justify-between px-6 border-b border-telescope-border/50 bg-telescope-sidebar/50 backdrop-blur shrink-0">
+            <header class="h-14 flex items-center justify-between px-6 border-b border-gray-200 dark:border-telescope-border/50 bg-white/80 dark:bg-telescope-sidebar/50 backdrop-blur shrink-0">
                 <div class="flex items-center gap-3">
                     <span class="inline-flex items-center px-2 py-0.5 rounded text-xs font-semibold bg-emerald-500/10 text-emerald-400 border border-emerald-500/20">Local</span>
                     <span class="text-sm font-medium text-gray-400">Monitoring Dashboard</span>
