@@ -5,10 +5,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <title>Telescope Dashboard</title>
-    <link rel="stylesheet" href="{{ asset('vendor/telescope-dashboard/css/app.css') }}?v={{ time() }}">
+    <link rel="stylesheet" href="{{ asset('vendor/telescope-dashboard/css/app.css') }}?v={{ filemtime(public_path('vendor/telescope-dashboard/css/app.css')) }}">
 </head>
 <body class="antialiased">
     @yield('content')
-    <script src="{{ asset('vendor/telescope-dashboard/js/app.js') }}?v={{ time() }}"></script>
+    <script src="{{ asset('vendor/telescope-dashboard/js/app.js') }}?v={{ filemtime(public_path('vendor/telescope-dashboard/js/app.js')) }}"></script></script>
 </body>
 </html>
