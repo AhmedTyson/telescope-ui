@@ -37,9 +37,9 @@ export function useEntries(type) {
 
         const payload = {
             type,
-            filters,
-            cursor: append ? nextCursor.value : null,
-            total_offset: append ? totalOffset.value : null,
+            ...filters,
+            before_sequence: append ? nextCursor.value : null,
+            offset: append ? totalOffset.value : null,
             sort_by: sortBy.value,
             sort_direction: sortDirection.value,
         };

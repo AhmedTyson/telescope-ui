@@ -71,13 +71,31 @@ class TelescopeQueryService
         ];
     }
 
+    protected function getCol(string $column): string
+    {
+        $isSqlite = DB::connection($this->connection)->getDriverName() === 'sqlite';
+        
+        if (! $isSqlite) {
+            return $column;
+        }
+
+        return match ($column) {
+            'c_method' => 'content->method',
+            'c_uri' => 'content->uri',
+            'c_response_status' => 'content->response_status',
+            'c_duration' => 'content->duration',
+            'c_time' => 'content->time',
+            default => $column,
+        };
+    }
+
     protected function applySorting(Builder $query, string $sortBy, string $sortDirection): void
     {
         $direction = strtoupper($sortDirection) === 'ASC' ? 'ASC' : 'DESC';
 
         match ($sortBy) {
-            'content.duration' => $query->orderBy('c_duration', $direction),
-            'content.time' => $query->orderBy('c_time', $direction),
+            'content.duration' => $query->orderBy($this->getCol('c_duration'), $direction),
+            'content.time' => $query->orderBy($this->getCol('c_time'), $direction),
             'created_at' => $query->orderBy('created_at', $direction),
             default => $query->orderBy('sequence', $direction),
         };
@@ -181,11 +199,13 @@ class TelescopeQueryService
         }
 
         if (! empty($filters['date_from'])) {
-            $query->where('created_at', '>=', str_replace('T', ' ', $filters['date_from']));
+            $from = \Carbon\Carbon::parse($filters['date_from'])->format('Y-m-d H:i:s');
+            $query->where('created_at', '>=', $from);
         }
 
         if (! empty($filters['date_to'])) {
-            $query->where('created_at', '<=', str_replace('T', ' ', $filters['date_to']));
+            $to = \Carbon\Carbon::parse($filters['date_to'])->endOfMinute()->format('Y-m-d H:i:s');
+            $query->where('created_at', '<=', $to);
         }
 
         if (! empty($filters['content'])) {
@@ -225,31 +245,32 @@ class TelescopeQueryService
     protected function applyRequestFilters(Builder $query, array $filters): void
     {
         if (! empty($filters['methods'])) {
-            $query->whereIn('c_method', $filters['methods']);
+            $query->whereIn($this->getCol('c_method'), $filters['methods']);
         }
 
         if (! empty($filters['uri'])) {
-            $query->where('c_uri', 'LIKE', '%'.$filters['uri'].'%');
+            $query->where($this->getCol('c_uri'), 'LIKE', '%'.$filters['uri'].'%');
         }
 
         if (! empty($filters['statuses'])) {
-            $query->where(function ($q) use ($filters) {
+            $statusCol = $this->getCol('c_response_status');
+            $query->where(function ($q) use ($filters, $statusCol) {
                 foreach ($filters['statuses'] as $status) {
                     if (str_ends_with($status, 'xx')) {
                         $prefix = (int) substr($status, 0, 1);
-                        $q->orWhere(function ($inner) use ($prefix) {
-                            $inner->where('c_response_status', '>=', $prefix * 100)
-                                ->where('c_response_status', '<', $prefix * 100 + 100);
+                        $q->orWhere(function ($inner) use ($prefix, $statusCol) {
+                            $inner->where($statusCol, '>=', $prefix * 100)
+                                ->where($statusCol, '<', $prefix * 100 + 100);
                         });
                     } else {
-                        $q->orWhere('c_response_status', (int) $status);
+                        $q->orWhere($statusCol, (int) $status);
                     }
                 }
             });
         }
 
         if (! empty($filters['min_duration'])) {
-            $query->where('c_duration', '>=', $filters['min_duration']);
+            $query->where($this->getCol('c_duration'), '>=', $filters['min_duration']);
         }
 
         if (! empty($filters['user_email'])) {
@@ -263,7 +284,7 @@ class TelescopeQueryService
             $groups = config('wame-telescope-dashboard.route_groups', []);
             if (isset($groups[$filters['route_group']])) {
                 $pattern = str_replace('*', '%', $groups[$filters['route_group']]);
-                $query->where('c_uri', 'LIKE', $pattern);
+                $query->where($this->getCol('c_uri'), 'LIKE', $pattern);
             }
         }
     }
@@ -271,16 +292,16 @@ class TelescopeQueryService
     protected function applyQueryFilters(Builder $query, array $filters): void
     {
         if (! empty($filters['slow_query'])) {
-            $query->where('c_time', '>=', 100);
+            $query->where($this->getCol('c_time'), '>=', 100);
         }
 
         if (! empty($filters['query_type'])) {
             $prefix = strtoupper($filters['query_type']);
-            $query->whereRaw("JSON_UNQUOTE(JSON_EXTRACT(content, '$.sql')) LIKE ?", [$prefix.'%']);
+            $query->where('content->sql', 'LIKE', $prefix.'%');
         }
 
         if (! empty($filters['min_duration'])) {
-            $query->where('c_time', '>=', $filters['min_duration']);
+            $query->where($this->getCol('c_time'), '>=', $filters['min_duration']);
         }
     }
 
