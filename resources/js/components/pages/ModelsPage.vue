@@ -2,24 +2,22 @@
     <div>
         <h1 class="text-2xl font-bold text-[#f4f4f5] dark:text-white mb-6">Models</h1>
         <FilterPanel :active-count="Object.keys(getActiveFilters()).length" @search="search" @reset="reset">
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
-                <div>
-                    <label class="block text-sm font-medium text-[#a1a1aa] dark:text-[#71717a] mb-1">Action</label>
-                    <select v-model="filters.model_action" class="select-field">
-                        <option value="">All</option>
-                        <option value="created">Created</option>
-                        <option value="updated">Updated</option>
-                        <option value="deleted">Deleted</option>
-                    </select>
-                </div>
-                <div>
-                    <label class="block text-sm font-medium text-[#a1a1aa] dark:text-[#71717a] mb-1">Model Type</label>
-                    <input v-model="filters.model_type" type="text" placeholder="e.g., App\Models\User" class="input-field">
-                </div>
+            <div>
+                <label class="block text-xs font-medium text-[#a1a1aa] dark:text-[#71717a] mb-1">Action</label>
+                <select v-model="filters.model_action" class="select-field text-xs">
+                    <option value="">All</option>
+                    <option value="created">Created</option>
+                    <option value="updated">Updated</option>
+                    <option value="deleted">Deleted</option>
+                </select>
             </div>
-            <div class="mb-4">
-                <label class="block text-sm font-medium text-[#a1a1aa] dark:text-[#71717a] mb-1">Search Content</label>
-                <input v-model="filters.content" type="text" placeholder="Search..." class="input-field">
+            <div>
+                <label class="block text-xs font-medium text-[#a1a1aa] dark:text-[#71717a] mb-1">Model Type</label>
+                <input v-model="filters.model_type" type="text" placeholder="e.g., App\Models\User" class="input-field text-xs">
+            </div>
+            <div>
+                <label class="block text-xs font-medium text-[#a1a1aa] dark:text-[#71717a] mb-1">Search Content</label>
+                <input v-model="filters.content" type="text" placeholder="Search..." class="input-field text-xs">
             </div>
             <DateRangeFilter v-model:from="filters.date_from" v-model:to="filters.date_to" />
         </FilterPanel>

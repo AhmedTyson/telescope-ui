@@ -2,25 +2,23 @@
     <div>
         <h1 class="text-2xl font-bold text-[#f4f4f5] dark:text-white mb-6">Cache</h1>
         <FilterPanel :active-count="Object.keys(getActiveFilters()).length" @search="search" @reset="reset">
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-                <div>
-                    <label class="block text-sm font-medium text-[#a1a1aa] dark:text-[#71717a] mb-2">Cache Type</label>
-                    <select v-model="filters.cache_type" class="select-field">
-                        <option value="">All</option>
-                        <option value="hit">Hit</option>
-                        <option value="missed">Missed</option>
-                        <option value="set">Set</option>
-                        <option value="forget">Forget</option>
-                    </select>
-                </div>
-                <div>
-                    <label class="block text-sm font-medium text-[#a1a1aa] dark:text-[#71717a] mb-2">Cache Key</label>
-                    <input v-model="filters.cache_key" type="text" placeholder="Search by cache key..." class="input-field">
-                </div>
-                <div>
-                    <label class="block text-sm font-medium text-[#a1a1aa] dark:text-[#71717a] mb-2">Content Search</label>
-                    <input v-model="filters.content" type="text" placeholder="Search content..." class="input-field">
-                </div>
+            <div>
+                <label class="block text-xs font-medium text-[#a1a1aa] dark:text-[#71717a] mb-1">Cache Type</label>
+                <select v-model="filters.cache_type" class="select-field text-xs">
+                    <option value="">All</option>
+                    <option value="hit">Hit</option>
+                    <option value="missed">Missed</option>
+                    <option value="set">Set</option>
+                    <option value="forget">Forget</option>
+                </select>
+            </div>
+            <div>
+                <label class="block text-xs font-medium text-[#a1a1aa] dark:text-[#71717a] mb-1">Cache Key</label>
+                <input v-model="filters.cache_key" type="text" placeholder="Search by cache key..." class="input-field text-xs">
+            </div>
+            <div>
+                <label class="block text-xs font-medium text-[#a1a1aa] dark:text-[#71717a] mb-1">Content Search</label>
+                <input v-model="filters.content" type="text" placeholder="Search content..." class="input-field text-xs">
             </div>
             <DateRangeFilter v-model:from="filters.date_from" v-model:to="filters.date_to" />
         </FilterPanel>

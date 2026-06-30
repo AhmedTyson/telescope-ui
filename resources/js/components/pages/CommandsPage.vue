@@ -2,19 +2,17 @@
     <div>
         <h1 class="text-2xl font-bold text-[#f4f4f5] dark:text-white mb-6">Commands</h1>
         <FilterPanel :active-count="Object.keys(getActiveFilters()).length" @search="search" @reset="reset">
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-                <div>
-                    <label class="block text-sm font-medium text-[#a1a1aa] dark:text-[#71717a] mb-2">Command Name</label>
-                    <input v-model="filters.command_name" type="text" placeholder="Search by command name..." class="input-field">
-                </div>
-                <div>
-                    <label class="block text-sm font-medium text-[#a1a1aa] dark:text-[#71717a] mb-2">Exit Code</label>
-                    <input v-model="filters.exit_code" type="number" placeholder="Filter by exit code..." class="input-field">
-                </div>
-                <div>
-                    <label class="block text-sm font-medium text-[#a1a1aa] dark:text-[#71717a] mb-2">Content Search</label>
-                    <input v-model="filters.content" type="text" placeholder="Search content..." class="input-field">
-                </div>
+            <div>
+                <label class="block text-xs font-medium text-[#a1a1aa] dark:text-[#71717a] mb-1">Command Name</label>
+                <input v-model="filters.command_name" type="text" placeholder="Search by command name..." class="input-field text-xs">
+            </div>
+            <div>
+                <label class="block text-xs font-medium text-[#a1a1aa] dark:text-[#71717a] mb-1">Exit Code</label>
+                <input v-model="filters.exit_code" type="number" placeholder="Filter by exit code..." class="input-field text-xs">
+            </div>
+            <div>
+                <label class="block text-xs font-medium text-[#a1a1aa] dark:text-[#71717a] mb-1">Content Search</label>
+                <input v-model="filters.content" type="text" placeholder="Search content..." class="input-field text-xs">
             </div>
             <DateRangeFilter v-model:from="filters.date_from" v-model:to="filters.date_to" />
         </FilterPanel>
