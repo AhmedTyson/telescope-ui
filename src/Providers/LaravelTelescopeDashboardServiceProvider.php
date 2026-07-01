@@ -51,6 +51,10 @@ class LaravelTelescopeDashboardServiceProvider extends ServiceProvider
             $this->publishes([
                 __DIR__.'/../../dist' => public_path('vendor/telescope-dashboard'),
             ], ['telescope-dashboard-assets', 'laravel-assets']);
+
+            $this->commands([
+                \Wame\LaravelTelescopeDashboard\Console\InstallCommand::class,
+            ]);
         }
     }
 }

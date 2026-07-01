@@ -6,7 +6,7 @@ return [
     'enabled' => env('TELESCOPE_DASHBOARD_ENABLED', true),
     'path' => env('TELESCOPE_DASHBOARD_PATH', 'telescope-dashboard'),
     'gate' => env('TELESCOPE_DASHBOARD_GATE', 'viewTelescope'),
-    'connection' => env('DB_CONNECTION_TELESCOPE', 'mysql_telescope'),
+    'connection' => env('DB_CONNECTION_TELESCOPE', env('DB_CONNECTION')),
     'per_page' => 50,
     'max_per_page' => 200,
     'route_groups' => [
@@ -15,5 +15,5 @@ return [
         'web' => '/*',
     ],
     'telescope_path' => env('TELESCOPE_PATH', 'telescope'),
-    'middleware' => ['web', 'auth'],
+    'middleware' => ['web'],
 ];
